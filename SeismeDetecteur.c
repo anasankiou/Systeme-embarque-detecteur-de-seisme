@@ -29,9 +29,7 @@ void loop() {
 
   Serial.println(gForce);
 
-  if (gForce > threshold) {
-    alert = true;
-  }
+  checkGForceThreshold(gForce);
 
   if (alert) {
     handleAlert(magnitude_richter);
@@ -82,6 +80,12 @@ float getGForce() {
 float calculateMagnitude(float gForce) {
   float acceleration_magnitude = gForce * 9.81;
   return log10(acceleration_magnitude) + 0.3;
+}
+
+void checkGForceThreshold(float gForce) {
+  if (gForce > threshold) {
+    alert = true;
+  }
 }
 
 void handleAlert(float magnitude_richter) {
